@@ -1,4 +1,4 @@
-# academic_schedule
+# Academic Schedule
 
 A new Flutter project.
 
