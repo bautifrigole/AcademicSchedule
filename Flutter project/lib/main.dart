@@ -75,9 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: Padding(
+        padding: const EdgeInsets.all(50.0),
         child: Column(
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
@@ -93,14 +92,63 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text(
-              'Los morado boys:',
+            Row(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 20.0),
+                  child: Text(
+                    'Hoy',
+                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Row(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 60, left: 20),
+                  child: Text(
+                    'Tareubi',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.normal),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 20.0),
+                  child: Text(
+                    'Mañana',
+                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 60, left: 20),
+                  child: Text(
+                    'Tareubi',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.normal),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 60.0),
+                  child: Text(
+                    '$_counter',
+                    style: const TextStyle(fontSize: 35, fontWeight: FontWeight.normal),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
