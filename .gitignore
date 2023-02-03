@@ -30,7 +30,7 @@ migrate_working_dir/
 .packages
 .pub-cache/
 .pub/
-/build/
+/Flutter project/build/
 
 # Symbolication related
 app.*.symbols
