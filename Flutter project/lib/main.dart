@@ -1,3 +1,4 @@
+import 'package:academic_schedule/screens/drawing_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 

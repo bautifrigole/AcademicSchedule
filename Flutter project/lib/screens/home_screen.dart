@@ -1,3 +1,4 @@
+import 'package:academic_schedule/screens/drawing_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget{
@@ -26,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
         physics: const NeverScrollableScrollPhysics(),
         children: const [
           CustomScreen(color: Colors.black12,),
-          CustomScreen(color: Colors.black54,),
+          DrawingScreen(),
         ],
       ),
 
@@ -51,8 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
 
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: "Settings"
+              icon: Icon(Icons.draw),
+              label: "Draw"
           ),
         ],
       ),
