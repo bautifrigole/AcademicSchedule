@@ -17,7 +17,7 @@ class CanvasView extends StatefulWidget {
 }
 
 class _CanvasViewState extends State<CanvasView> {
-  List<DrawingPoints?> points = [];
+  List<List<DrawingPoints>> lines = [];
   Color strokeColor = Colors.black;
   double strokeWidth = 3.0;
 
@@ -27,19 +27,32 @@ class _CanvasViewState extends State<CanvasView> {
 
       appBar: PreferredSize(
           preferredSize: const Size(60,60),
-          child: Container(
-            padding: const EdgeInsets.only(top: 20, left: 480),
-            child: FloatingActionButton(
-              backgroundColor: Colors.white30.withOpacity(0.6),
-              onPressed: () => setState(() {
-                points.clear();
-              }),
-              child: const Icon(
-                Icons.clear,
-                color: Colors.black87,
-                size: 35,
-              )
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              FloatingActionButton(
+                  backgroundColor: Colors.white30.withOpacity(0.6),
+                  onPressed: () => setState(() {
+                    lines.removeLast();
+                  }),
+                  child: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.black87,
+                    size: 35,
+                  )
+              ),
+              FloatingActionButton(
+                backgroundColor: Colors.white30.withOpacity(0.6),
+                onPressed: () => setState(() {
+                  lines.clear();
+                }),
+                child: const Icon(
+                  Icons.clear,
+                  color: Colors.black87,
+                  size: 35,
+                )
+              ),
+            ],
           ),
       ),
 
@@ -49,7 +62,7 @@ class _CanvasViewState extends State<CanvasView> {
           child: Slider(
             value: strokeWidth,
             min: 1,
-            max: 5,
+            max: 7,
             onChanged: (val) => setState(() {
               strokeWidth = val;
             }),
@@ -74,7 +87,7 @@ class _CanvasViewState extends State<CanvasView> {
         onPanEnd: _onPanEnd,
         child: CustomPaint(
           size: Size.infinite,
-          painter: MyPainter(points: points),
+          painter: MyPainter(lines: lines),
         ),
       ),
     );
@@ -82,6 +95,8 @@ class _CanvasViewState extends State<CanvasView> {
 
   void _onPanStart(DragStartDetails details){
     setState(() {
+      List<DrawingPoints> newLine = [];
+      lines.add(newLine);
       _addPoint(details.localPosition);
     });
   }
@@ -94,12 +109,12 @@ class _CanvasViewState extends State<CanvasView> {
 
   void _onPanEnd(DragEndDetails details){
     setState(() {
-      points.add(null);
+
     });
   }
 
   void _addPoint(Offset position) {
-    points.add(DrawingPoints(
+    lines.last.add(DrawingPoints(
         point: position,
         paint: Paint()
           ..color = strokeColor
@@ -126,16 +141,19 @@ class _CanvasViewState extends State<CanvasView> {
 }
 
 class MyPainter extends CustomPainter{
-  List<DrawingPoints?> points;
-  MyPainter({required this.points});
+  List<List<DrawingPoints>> lines;
+  MyPainter({required this.lines});
 
   @override
   void paint(Canvas canvas, Size size) {
-    for (var i = 0; i < points.length-1; i++){
-      var currentPoint = points[i];
-      var nextPoint = points[i+1];
-      if (currentPoint != null && nextPoint != null) {
-        canvas.drawLine(currentPoint.point, nextPoint.point, currentPoint.paint);
+    for (List<DrawingPoints> line in lines) {
+      for (var i = 0; i < line.length - 1; i++) {
+        var currentPoint = line[i];
+        var nextPoint = line[i + 1];
+        if (currentPoint != null && nextPoint != null) {
+          canvas.drawLine(
+              currentPoint.point, nextPoint.point, currentPoint.paint);
+        }
       }
     }
   }
